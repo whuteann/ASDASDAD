@@ -14,7 +14,7 @@ const AddExpense: React.FC = () => {
   // Create expense mutation
   const mutation = useMutation({
     mutationFn: async (data: InsertExpense) => {
-      const response = await fetch('/api/expenses', {
+      const response = await fetch(`${import.meta.env.VITE_FIREBASE_API_KEY}/api/expenses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,8 +31,8 @@ const AddExpense: React.FC = () => {
     },
     onSuccess: () => {
       // Invalidate queries to refetch data
-      queryClient.invalidateQueries({ queryKey: ['/api/expenses'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/expenses/month'] });
+      queryClient.invalidateQueries({ queryKey: [`${import.meta.env.VITE_FIREBASE_API_KEY}/api/expenses`] });
+      queryClient.invalidateQueries({ queryKey: [`${import.meta.env.VITE_FIREBASE_API_KEY}/api/expenses/month`] });
       
       // Show success toast
       toast({

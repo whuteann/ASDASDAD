@@ -15,9 +15,9 @@ const Reports: React.FC = () => {
 
   // Fetch expenses for the selected month
   const { data: expensesRaw, isLoading } = useQuery<Expense[]>({
-    queryKey: ['/api/expenses/month', selectedYear, selectedMonth],
+    queryKey: [`${import.meta.env.VITE_FIREBASE_API_KEY}/api/expenses/mont`, selectedYear, selectedMonth],
     queryFn: async () => {
-      const response = await fetch(`/api/expenses/month/${selectedYear}/${selectedMonth}`);
+      const response = await fetch(`${import.meta.env.VITE_FIREBASE_API_KEY}/api/expenses/month/${selectedYear}/${selectedMonth}`);
       if (!response.ok) throw new Error('Failed to fetch expenses');
       return response.json();
     }
